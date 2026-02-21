@@ -8,8 +8,13 @@ import { ProcessSection } from "@/components/process-section";
 import { TestimonialsSection } from "@/components/testimonials-section";
 import { CtaSection } from "@/components/cta-section";
 import { Footer } from "@/components/footer";
-import { NeuralNetworkBg } from "@/components/neural-network-bg";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
+import dynamic from "next/dynamic";
+
+const NeuralNetworkBg = dynamic(
+  () => import("@/components/neural-network-bg").then((mod) => mod.NeuralNetworkBg),
+  { ssr: false }
+);
 
 export default function Home() {
   return (

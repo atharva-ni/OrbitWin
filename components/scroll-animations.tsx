@@ -8,6 +8,7 @@ import {
   type Variants,
 } from "framer-motion";
 import { useRef, type ReactNode } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // --- Reusable animation variants (kept for StaggerItem compatibility) ---
 
@@ -125,6 +126,7 @@ export function ScrollReveal({
   className,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 95%", "start 40%"],
@@ -136,6 +138,14 @@ export function ScrollReveal({
     type,
     delay
   );
+
+  if (isMobile) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -162,12 +172,21 @@ export function StaggerReveal({
   fast = false,
 }: StaggerRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 95%", "start 25%"],
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
+  if (isMobile) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -265,6 +284,7 @@ export function TextReveal({
   delay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 95%", "start 50%"],
@@ -275,6 +295,14 @@ export function TextReveal({
 
   const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
   const y = useTransform(scrollYProgress, [start, end], [20, 0]);
+
+  if (isMobile) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <motion.div

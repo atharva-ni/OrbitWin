@@ -9,17 +9,12 @@ import { TestimonialsSection } from "@/components/testimonials-section";
 import { CtaSection } from "@/components/cta-section";
 import { Footer } from "@/components/footer";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
-import dynamic from "next/dynamic";
-
-const NeuralNetworkBg = dynamic(
-  () => import("@/components/neural-network-bg").then((mod) => mod.NeuralNetworkBg),
-  { ssr: false }
-);
+import { NeuralNetworkBgDynamic } from "@/components/neural-network-bg-dynamic";
 
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-x-hidden">
-      <NeuralNetworkBg />
+      <NeuralNetworkBgDynamic />
       <Navbar />
       <Hero />
       <ProblemSection />
